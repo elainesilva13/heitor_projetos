@@ -1,5 +1,9 @@
 import random
-input("Você quer jogar com estado ou Paises?")  # capturar a resposta
+from unidecode import unidecode
+
+
+escolha = input("Você quer jogar com estado ou Paises?")  # capturar a resposta
+print('Digite a qualquer momento "Sair"')
 estados = {
     'Acre': 'Rio Branco',
     'Alagoas': 'Maceió',
@@ -13,7 +17,7 @@ estados = {
     'Maranhão': 'São Luís',
     'Mato Grosso': 'Cuiabá',
     'Mato Grosso do Sul': 'Campo Grande',
-    'Minas Gerais': 'Belo Horizonte',
+    'Minas Gerais' : 'Belo Horizonte',
     'Pará': 'Belém',
     'Paraíba': 'João Pessoa',
     'Paraná': 'Curitiba',
@@ -30,26 +34,35 @@ estados = {
     'Tocantins': 'Palmas'
 }
 paises = {'Argentina': 'Buenos Aires',
-          'Bolívia': 'Sucre',
-          'Brasil': 'Brasília',
-          'Chile': 'Santiago',
-          'Colômbia': 'Bogotá',
-          'Ecuador': 'Quito',
-          'Guiana': 'Georgetown',
-          'Paraguai': 'Assunção',
-          'Peru': 'Lima',
-          'Suriname': 'Paramaribo',
-          'Uruguai': 'Montevidéu',
-          'Venezuela': 'Caracas'}
+        'Bolívia': 'Sucre',
+        'Brasil': 'Brasília',
+        'Chile': 'Santiago',
+        'Colômbia': 'Bogotá',
+        'Ecuador': 'Quito',
+        'Guiana': 'Georgetown',
+        'Paraguai': 'Assunção',
+        'Peru': 'Lima',
+        'Suriname': 'Paramaribo',
+        'Uruguai': 'Montevidéu',
+        'Venezuela': 'Caracas'}
 
-# verificar o que o usuário respondeu acima e sortear a pergunta do dicionário correspondente
-uf = random.choice(list(estados.keys()))
-af = random.choice(list(paises.keys()))
-# uma pergunta somente de cada vez
-resposta = input(f"Qual é a capital do estado {uf}?")
-resposta2 = input(f"Qual é a captal do pais{af}?")
-capital = estados[uf]
-if capital.upper() == resposta.upper():
-    print("Você acertou!")
-else:
-    print("Você errou")
+if escolha == 'estados':
+    tema = estados
+elif escolha == "paises":
+    tema = paises
+
+pontos = 0
+
+while True:
+    lugar = random.choice(list(tema.keys()))
+    resposta = input(f"Qual é a capital de {lugar}?")
+    if resposta.lower() == "sair":
+        break
+    capital = tema[lugar]
+    if unidecode(capital.upper()) == unidecode(resposta.upper()):
+        print("Você acertou!")
+        pontos += 1
+    else:
+        print("Você errou")
+
+print(f"Pontos: {pontos}")
