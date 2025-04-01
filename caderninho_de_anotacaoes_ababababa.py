@@ -7,3 +7,7 @@ resultado = 0
 for parcela in parcelas:
     resultado = resultado + parcela
 print(resultado)
+
+
+#IMPORTANTE!!!!
+# Toda variável precisa ser inicializada e ter seu valor inicial definido
